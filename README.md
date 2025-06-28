@@ -111,7 +111,10 @@ npm run dev
 cd server
 pip install -r requirements.txt
 python app.py
-##📌 Future Plans
+
+
+
+**##📌 Future Plans**
  Integrate Dash/Power BI for advanced visualizations
 
  Cloud-hosted APIs using FastAPI + AWS/GCP
@@ -124,12 +127,12 @@ python app.py
 
  Data anonymization and privacy filters
 
-##🧪 Model Development
+**##🧪 Model Development**
 All models will be trained using real city datasets and evaluated for:
 Accuracy
 Scalability
 Explainability (XAI planned using SHAP/LIME)
 
-📃 License
+**📃 License**
 This project is under the MIT License – free to use and extend with attribution.
 
