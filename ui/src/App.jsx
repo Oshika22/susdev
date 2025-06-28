@@ -22,7 +22,7 @@ function MainContent() {
   };
 
   return (
-    <>
+    <div className='bg-slate-50'>
       <BasicNavbar scrollToSection={scrollToSection} refs={{ homeRef, dashRef, aboutRef, teamRef }} />
 
       {/* Conditional rendering based on route */}
@@ -47,7 +47,7 @@ function MainContent() {
       {location.pathname === '/air' && <Air />}
 
       <Footer />
-    </>
+    </div>
   );
 }
 
