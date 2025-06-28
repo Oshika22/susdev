@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import bgImg from "../assets/images/bg.jpg"; // Adjust the path as necessary
-import { bgweb, i1, i2, i3, bg4 } from "../assets/images/index"; // Adjust the path as necessary
+import { bgweb, i1, i2, i3, bg4, globe } from "../assets/images/index"; // Adjust the path as necessary
 import Dashboard from './dashboard';
 
 const Home = ({ scrollToSection, refs }) => {

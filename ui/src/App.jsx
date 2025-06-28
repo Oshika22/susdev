@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import './App.css';
 
 import BasicNavbar from './components/nav';
 import Home from './pages/home';
