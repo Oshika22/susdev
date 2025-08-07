@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import bgImg from "../assets/images/bg.jpg"; // Adjust the path as necessary
 import { bgweb, i1, i2, i3, bg4, globe } from "../assets/images/index"; // Adjust the path as necessary
 import Dashboard from './dashboard';
-import CreativeVisuals from "../components/CreativeVisuals.JSx";
+import CreativeVisuals from "../components/CreativeVisuals.jsx";
 import CityscapeBackdrop from "../components/CityScape";
 
 const Home = ({ scrollToSection, refs }) => {
