@@ -54,14 +54,7 @@ const Home = ({ scrollToSection, refs }) => {
               Optimizing Urban Life with AI & Data
             </h1>
 
-            <motion.button
-              onClick={() => scrollToSection(refs.dashRef)}
-              className="w-[120px] h-[50px] bg-gradient-to-b from-purple-900 to-purple-700 rounded-lg shadow-md text-[#fff] border-2 border-zinc-300 mt-6 transition-transform duration-300 hover:scale-105 hover:from-purple-700 hover:to-purple-900"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get Started
-            </motion.button>
+
           </motion.div>
 
           <CreativeVisuals />
