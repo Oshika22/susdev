@@ -126,6 +126,7 @@
 
 
 import React from 'react';
+import { motion } from "framer-motion";
 import { faWind, faCarOn, faPlug, faArrowUpFromWaterPump, faDumpsterFire } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import DashboardCard from '../components/DashboardCard';
@@ -149,6 +150,7 @@ export default function Dashboard() {
       title: 'Traffic Forecast',
       description: 'Real-time traffic data and congestion predictions',
       icon: faCarOn,
+      onClick: () => navigate('/traffic'),
     },
     {
       title: 'Energy Usage',
@@ -164,34 +166,66 @@ export default function Dashboard() {
       title: 'Waste Management',
       description: 'Track and optimize city waste disposal',
       icon: faDumpsterFire,
+      onClick: () => navigate('/traffic'),
     },
   ];
-
   return (
     <div className="min-h-screen px-4 py-10">
-      <h1 className="text-4xl md:text-5xl font-bold text-center text-purple-700 mb-10">
+      {/* Heading Animation */}
+      <motion.h1
+        className="text-4xl md:text-5xl font-bold text-center text-purple-700 mb-10"
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         Smart City Dashboard
-      </h1>
+      </motion.h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      {/* Cards Grid */}
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          visible: {
+            transition: {
+              staggerChildren: 0.2,
+            },
+          },
+        }}
+      >
         {cards.map((card, idx) => (
-          <DashboardCard
+          <motion.div
             key={idx}
-            title={card.title}
-            description={card.description}
-            icon={card.icon}
-            onClick={card.onClick}
-          />
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <DashboardCard
+              title={card.title}
+              description={card.description}
+              icon={card.icon}
+              onClick={card.onClick}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      <div className="max-w-3xl mx-auto mt-10">
+      {/* Summary Card */}
+      <motion.div
+        className="max-w-3xl mx-auto mt-10"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
+      >
         <DashboardCard
           title="Overall Summary"
           description="Unified overview of all key metrics"
           icon={faWind}
         />
-      </div>
+      </motion.div>
     </div>
   );
 }

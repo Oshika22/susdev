@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { motion } from "framer-motion";
 import bgImg from "../assets/images/bg.jpg"; // Adjust the path as necessary
 import { bgweb, i1, i2, i3, bg4, globe } from "../assets/images/index"; // Adjust the path as necessary
 import Dashboard from './dashboard';
+import CreativeVisuals from "../components/CreativeVisuals.JSx";
+import CityscapeBackdrop from "../components/CityScape";
 
 const Home = ({ scrollToSection, refs }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -18,57 +21,57 @@ const Home = ({ scrollToSection, refs }) => {
 
   return (
     <>
-      <div
-        className={`w-full h-[600px] flex flex-col justify-center items-center text-shadow transition-all duration-300 
-        ${scrolled ? "bg-white shadow-md" : "bg-transparent"} 
-        bg-cover bg-center`}
-        style={{
-          backgroundImage: `url(${bgImg})`,
-        }}
+      <motion.div
+        className="w-full h-screen flex flex-col justify-center items-center bg-gradient-to-r from-purple-200 via-indigo-50 to-purple-200 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
-        <div className="flex flex-col justify-center items-center w-full h-screen bg-white bg-opacity-50">
-        
-            {/* <div className="text-[#000000] text-[40px] font-semibold font-['inter'] m-2 text-center">
+        <motion.div
+          className="absolute top-0 left-5 -translate-x-1/2 w-[500px] h-[500px] bg-gradient-to-b from-purple-200 via-transparent to-transparent blur-2xl pointer-events-none z-0"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3, duration: 1 }}
+        />
+
+        <motion.div
+          className="flex flex-col justify-center items-center w-full h-screen relative mt-20 z-10"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+        >
+
+          <motion.div
+            className="m-4 md:w-1/2  text-[20px] text-center flex flex-col justify-center items-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+          >
+            <div className="text-[40px] font-semibold font-Limelight m-2 text-center bg-gradient-to-r from-purple-900 via-purple-700 to-purple-900 text-transparent bg-clip-text  w-80 z-10 text-shadow">
+              UrbanOptima
+            </div>
+            <h1 className="text-[25px] font-semibold mb-4 text-center  bg-gradient-to-r from-slate-700 via-purple-900 to-slate-700 text-transparent bg-clip-text z-10 text-shadow">
               Optimizing Urban Life with AI & Data
-            </div> */}
-    
-            <div className="flex flex-col md:flex-row justify-around items-start w-full p-6">
-              <div className="m-4 md:w-1/2  text-[20px] text-center md:text-left">
-                <div className="text-[40px] font-semibold font-Limelight m-2 text-center bg-gradient-to-r from-purple-950 via-purple-500 to-purple-950 text-transparent bg-clip-text">
-                    UrbanOptima
-                </div>
-                <h1 className="text-[35px] font-semibold font-yatra mb-4 text-center  bg-gradient-to-r from-purple-700 via-slate-500 to-purple-800 text-transparent bg-clip-text">
-                      Optimizing Urban Life with AI & Data
-                </h1>
-                <div className="text-justify font-bold text-black">
-                  Welcome to our AI-Driven Sustainable Cities Dashboard, designed to revolutionize urban living through advanced technology. Our AI-powered platform predicts air quality, traffic flow, energy usage, and waste patterns, offering data-driven insights to build smarter, greener cities. With a focus on sustainability and innovation, we're here to empower city planners and communities alike. Discover how AI can shape a more efficient, eco-friendly future.
-                </div>
-    
-                <button
-                  onClick={() => scrollToSection(refs.dashRef)}
-                  className="w-[120px] h-[50px] bg-gradient-to-b from-purple-800 to-purple-500 rounded-[15px] shadow-lg text-[#fff] border-2 border-zinc-300 mt-6 transition-transform duration-300 hover:scale-105 hover:from-purple-500 hover:to-purple-800"
-                >
-                  Get Started
-                </button>
-          </div>
-          <div className="circicon w-[200px] h-[200px] rounded-full bg-zinc-300 hidden md:block mt-4 shadow-lg shadow-black" style={{
-          backgroundImage: `url(${i1})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}></div>
-          <div className="circicon w-[230px] h-[230px] rounded-full bg-zinc-300 border-3 border-white hidden md:block mt-40 shadow-lg shadow-black" style={{
-          backgroundImage: `url(${i3})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}></div>
-        </div>
-    
-          {/* Optional image or visual block */}
-          {/* <div className="w-[300px] h-[300px] rounded-full bg-zinc-300 hidden md:block"></div> */}
-        </div>
-      </div>
+            </h1>
+
+            <motion.button
+              onClick={() => scrollToSection(refs.dashRef)}
+              className="w-[120px] h-[50px] bg-gradient-to-b from-purple-900 to-purple-700 rounded-lg shadow-md text-[#fff] border-2 border-zinc-300 mt-6 transition-transform duration-300 hover:scale-105 hover:from-purple-700 hover:to-purple-900"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Get Started
+            </motion.button>
+          </motion.div>
+
+          <CreativeVisuals />
+          <CityscapeBackdrop />
+
+        </motion.div>
+      </motion.div>
     </>
   );
 };
 
 export default Home;
+

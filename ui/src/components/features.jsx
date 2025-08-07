@@ -1,6 +1,8 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDownload, faRobot, faChartBar } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
+
 
 const fList = [
     {
@@ -25,9 +27,16 @@ const fList = [
 
 const FeaturePanel = ({ title, icon, disc }) => {
     return (
-        <div className="relative group transform transition-all duration-500 ease-in-out rounded-xl shadow-xl p-8 bg-white hover:scale-105 h-[400px] flex flex-col justify-between">
+        <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="relative group rounded-xl shadow-xl p-8 bg-white h-[400px] flex flex-col justify-between overflow-hidden"
+        >
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-300 to-purple-700 rounded-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-200 to-purple-500 rounded-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
 
             <div className="relative flex flex-col justify-between items-center text-center p-2 h-full">
                 {/* Icon */}
@@ -43,14 +52,14 @@ const FeaturePanel = ({ title, icon, disc }) => {
                     {disc}
                 </p>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
 export default function Feature() {
     return (
         <div className="px-6 py-10">
-            <h1 className="text-6xl text-[#333333] font-semibold mb-6 text-center">Features</h1>
+            <h1 className="text-6xl text-purple-700 font-semibold mb-6 text-center">Features</h1>
             <div className="flex flex-wrap justify-center items-center gap-6">
                 {fList.map((fEle) => (
                     <div key={fEle.id} className="w-full sm:w-1/2 md:w-1/3 xl:w-1/4 p-4">

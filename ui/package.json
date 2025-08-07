@@ -14,13 +14,16 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@gsap/react": "^2.1.1",
-    "axios": "^1.7.7",
+    "@tomtom-international/web-sdk-maps": "^6.25.0",
+    "axios": "^1.11.0",
     "bootstrap": "^5.3.3",
+    "framer-motion": "^12.23.12",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
     "react-router-dom": "^6.28.0",
+    "recharts": "^3.1.0",
     "ui": "file:"
   },
   "devDependencies": {
@@ -36,6 +39,6 @@
     "globals": "^15.11.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
-    "vite": "^5.4.10"
+    "vite": "^6.3.5"
   }
 }

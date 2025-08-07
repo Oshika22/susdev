@@ -8,7 +8,9 @@ import CircularLayout from './pages/about';
 import Feature from './components/features';
 import Footer from './components/footer';
 import Dashboard from './pages/dashboard';
-import { Air } from './modelDisplay/Air';
+import Air from './modelDisplay/Air';
+import Traffic from './modelDisplay/Traffic';
+import '@tomtom-international/web-sdk-maps/dist/maps.css';
 
 function MainContent() {
   const location = useLocation();
@@ -23,8 +25,10 @@ function MainContent() {
 
   return (
     <div className='bg-slate-50'>
-      <BasicNavbar scrollToSection={scrollToSection} refs={{ homeRef, dashRef, aboutRef, teamRef }} />
+      <div><BasicNavbar scrollToSection={scrollToSection} refs={{ homeRef, dashRef, aboutRef, teamRef }} /></div>
 
+      {location.pathname === '/air' && <Air />}
+      {location.pathname === '/traffic' && <Traffic />}
       {/* Conditional rendering based on route */}
       {location.pathname === '/' && (
         <>
@@ -44,7 +48,7 @@ function MainContent() {
         </>
       )}
 
-      {location.pathname === '/air' && <Air />}
+
 
       <Footer />
     </div>
