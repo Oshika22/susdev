@@ -111,7 +111,8 @@ cd server
 pip install -r requirements.txt 
 python -m app
 ```
-**###Configration Setup**
+
+### Configration Setup
 Before running the backend, create a configuration file to store your API keys.
 Inside server/app/, create a new file named config.py
 Paste the following code inside it:
@@ -121,7 +122,7 @@ ORS_API_KEY = "your_openrouteservice_api_key_here"
 ```
 Replace the placeholders (your_weather_api_key_here, your_openrouteservice_api_key_here) with your actual API keys.
 
-**##📌 Future Plans**
+### 📌 Future Plans
  Integrate Dash/Power BI for advanced visualizations
 
  Cloud-hosted APIs using FastAPI + AWS/GCP
@@ -133,8 +134,7 @@ Replace the placeholders (your_weather_api_key_here, your_openrouteservice_api_k
  User-specific dashboards (residents vs authorities)
 
  Data anonymization and privacy filters
-
-**##🧪 Model Development**
+## 🧪 Model Development
 All models will be trained using real city datasets and evaluated for:
 Accuracy
 Scalability
