@@ -98,21 +98,28 @@ Tools: **Chart.js**, **D3.js**, **Plotly Dash**, **Mapbox** for geospatial mappi
 - pip / virtualenv
 
 ### Setup Instructions
-
-#### 1. Clone the Repository
 ```bash
+# 1. Clone the Repository
 git clone https://github.com/your-username/urbanoptima.git
 cd urbanoptima
-2. Frontend Setup
+# 2. Frontend Setup
 cd client
 npm install
 npm run dev
-3. Backend Setup
+# 3. Backend Setup
 cd server
-pip install -r requirements.txt
-python app.py
-
-
+pip install -r requirements.txt 
+python -m app
+```
+**###Configration Setup**
+Before running the backend, create a configuration file to store your API keys.
+Inside server/app/, create a new file named config.py
+Paste the following code inside it:
+```bash
+WEATHER_API_KEY = "your_weather_api_key_here"
+ORS_API_KEY = "your_openrouteservice_api_key_here"
+```
+Replace the placeholders (your_weather_api_key_here, your_openrouteservice_api_key_here) with your actual API keys.
 
 **##📌 Future Plans**
  Integrate Dash/Power BI for advanced visualizations
