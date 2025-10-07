@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from app.services.tomtom import get_coordinates
+# from app.services.tomtom import get_coordinates
 
 geocode_bp = Blueprint('geocode', __name__)
 

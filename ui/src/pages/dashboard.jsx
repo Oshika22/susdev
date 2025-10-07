@@ -156,6 +156,7 @@ export default function Dashboard() {
       title: 'Energy Usage',
       description: 'Daily energy consumption insights',
       icon: faPlug,
+      onClick: () => navigate('/energy'),
     },
     {
       title: 'Water Usage',

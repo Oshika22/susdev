@@ -32,7 +32,7 @@ Built using **React**, **Tailwind CSS**, **Flask**, **scikit-learn**, and planne
 ## 🔑 Core Features
 
 ### 1. 🌀 Predictive Air Quality Monitoring
-- Forecast 7-day air quality trends using historical weather, traffic, and pollution data.
+- Forecast 3-day air quality trends using historical weather, traffic, and pollution data.
 - Suggest interventions (e.g., traffic restrictions in high-pollution zones).
 - **New:** Predictive heatmaps by location and time.
 

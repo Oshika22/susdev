@@ -4,8 +4,8 @@ import openrouteservice
 from openrouteservice import convert
 from geopy.geocoders import Nominatim
 from geopy.distance import geodesic
-from config import WEATHER_API_KEY
-from config import ORS_API_KEY
+from app.config import WEATHER_API_KEY
+from app.config import ORS_API_KEY
 import requests
 
 

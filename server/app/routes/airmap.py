@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify
 import requests
 import folium
 from geopy.geocoders import Nominatim
-from config import WEATHER_API_KEY
+from app.config import WEATHER_API_KEY
 air_bp = Blueprint('air', __name__)
 
 

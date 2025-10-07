@@ -10,6 +10,7 @@ import Footer from './components/footer';
 import Dashboard from './pages/dashboard';
 import Air from './modelDisplay/Air';
 import Traffic from './modelDisplay/Traffic';
+import Energy from './modelDisplay/Energy';
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
 
 function MainContent() {
@@ -29,6 +30,7 @@ function MainContent() {
 
       {location.pathname === '/air' && <Air />}
       {location.pathname === '/traffic' && <Traffic />}
+      {location.pathname === '/energy' && <Energy />}
       {/* Conditional rendering based on route */}
       {location.pathname === '/' && (
         <>
