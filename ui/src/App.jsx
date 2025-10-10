@@ -7,10 +7,14 @@ import Team from './pages/teams';
 import CircularLayout from './pages/about';
 import Feature from './components/features';
 import Footer from './components/footer';
+import { ChatBot } from './components/ChatBot';
+import ChatbotBox from './pages/ChatbotBox';
 import Dashboard from './pages/dashboard';
 import Air from './modelDisplay/Air';
 import Traffic from './modelDisplay/Traffic';
 import Energy from './modelDisplay/Energy';
+import Water from './modelDisplay/Water';
+
 import '@tomtom-international/web-sdk-maps/dist/maps.css';
 
 function MainContent() {
@@ -28,9 +32,12 @@ function MainContent() {
     <div className='bg-slate-50'>
       <div><BasicNavbar scrollToSection={scrollToSection} refs={{ homeRef, dashRef, aboutRef, teamRef }} /></div>
 
+      {location.pathname === '/Chatbox' && <ChatbotBox />}
       {location.pathname === '/air' && <Air />}
       {location.pathname === '/traffic' && <Traffic />}
       {location.pathname === '/energy' && <Energy />}
+      {location.pathname === '/water' && <Water />}
+
       {/* Conditional rendering based on route */}
       {location.pathname === '/' && (
         <>
@@ -49,9 +56,8 @@ function MainContent() {
           </div>
         </>
       )}
-
-
-
+      <ChatbotBox/>
+    
       <Footer />
     </div>
   );

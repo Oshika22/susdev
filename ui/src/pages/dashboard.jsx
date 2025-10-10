@@ -130,19 +130,20 @@ import { motion } from "framer-motion";
 import { faWind, faCarOn, faPlug, faArrowUpFromWaterPump, faDumpsterFire } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import DashboardCard from '../components/DashboardCard';
+import SustainablityCard from '../components/SustainablityCard';
 
 export default function Dashboard() {
   const navigate = useNavigate();
 
   const cards = [
-    {
-      title: 'City Overview',
-      description: 'View interactive metrics for your city',
-      icon: faWind,
-    },
+    // {
+    //   title: 'City Overview',
+    //   description: 'View interactive metrics for your city',
+    //   icon: faWind,
+    // },
     {
       title: 'Air Quality',
-      description: 'Air Quality Index: 2.61 (Sensitive)',
+      description: 'AQI',
       icon: faWind,
       onClick: () => navigate('/air'),
     },
@@ -162,13 +163,14 @@ export default function Dashboard() {
       title: 'Water Usage',
       description: 'Water consumption and conservation tips',
       icon: faArrowUpFromWaterPump,
+      onClick: () => navigate('/water'),
     },
-    {
-      title: 'Waste Management',
-      description: 'Track and optimize city waste disposal',
-      icon: faDumpsterFire,
-      onClick: () => navigate('/traffic'),
-    },
+    // {
+    //   title: 'Waste Management',
+    //   description: 'Track and optimize city waste disposal',
+    //   icon: faDumpsterFire,
+    //   onClick: () => navigate('/traffic'),
+    // },
   ];
   return (
     <div className="min-h-screen px-4 py-10">
@@ -181,52 +183,62 @@ export default function Dashboard() {
       >
         Smart City Dashboard
       </motion.h1>
-
-      {/* Cards Grid */}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          visible: {
-            transition: {
-              staggerChildren: 0.2,
-            },
-          },
-        }}
-      >
-        {cards.map((card, idx) => (
+      <div className='w-full flex justify-center items-center'>
+        <div className='flex flex-col lg:flex-row items-start justify-center gap-6 px-4 md:px-8 lg:px-12 w-4/5'>
           <motion.div
-            key={idx}
+            className="w-full lg:w-64"
             variants={{
               hidden: { opacity: 0, y: 30 },
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <DashboardCard
-              title={card.title}
-              description={card.description}
-              icon={card.icon}
-              onClick={card.onClick}
-            />
+            <SustainablityCard/>
           </motion.div>
-        ))}
-      </motion.div>
+          {/* Cards Grid */}
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-3xl mx-auto"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.2,
+                },
+              },
+            }}
+          >
+          
+            {cards.map((card, idx) => (
+              <motion.div
+                key={idx}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                
+                <DashboardCard
+                  title={card.title}
+                  description={card.description}
+                  icon={card.icon}
+                  onClick={card.onClick}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
 
       {/* Summary Card */}
-      <motion.div
+      {/* <motion.div
         className="max-w-3xl mx-auto mt-10"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6, duration: 0.6, ease: "easeOut" }}
-      >
-        <DashboardCard
-          title="Overall Summary"
-          description="Unified overview of all key metrics"
-          icon={faWind}
-        />
-      </motion.div>
+      >m;,','
+      </motion.div> */}
     </div>
   );
 }
