@@ -1,1 +1,15 @@
 server/app/config.py
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Mac
+.DS_Store
+
+# Images used for testing
+server/water/waste_detection/*.jpg
+
+# Node
+node_modules/
+dist/
