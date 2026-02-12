@@ -1,3 +1,4 @@
+import Waste from "./WasteCard";
 import { useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
@@ -29,7 +30,13 @@ function MainContent() {
   };
 
   return (
+    
     <div className='bg-slate-50'>
+
+      <h1 className="text-red-600 text-xl text-center">
+        Current Path: {location.pathname}
+      </h1>
+
       <div><BasicNavbar scrollToSection={scrollToSection} refs={{ homeRef, dashRef, aboutRef, teamRef }} /></div>
 
       {location.pathname === '/Chatbox' && <ChatbotBox />}
@@ -37,6 +44,8 @@ function MainContent() {
       {location.pathname === '/traffic' && <Traffic />}
       {location.pathname === '/energy' && <Energy />}
       {location.pathname === '/water' && <Water />}
+      {location.pathname === '/waste' && <Waste />}
+
 
       {/* Conditional rendering based on route */}
       {location.pathname === '/' && (

@@ -1,15 +1,14 @@
-server/app/config.py
 # Python
 __pycache__/
 *.pyc
-*.pyo
-
-# Mac
-.DS_Store
-
-# Images used for testing
-server/water/waste_detection/*.jpg
+venv/
 
 # Node
 node_modules/
 dist/
+
+# Models / weights
+weights/
+
+# Environment
+.env

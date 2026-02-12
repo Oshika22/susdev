@@ -5,37 +5,43 @@ from geopy.geocoders import Nominatim
 import requests_cache
 from retry_requests import retry
 
-airForecast_bp = Blueprint('airForecast', __name__)
+# ✅ Blueprint name MUST match __init__.py import
+aqiforecast_bp = Blueprint('aqiforecast', __name__)
 
-@airForecast_bp.route('/api/airForecast', methods=['GET'])
+
+@aqiforecast_bp.route('/api/airForecast', methods=['GET'])
 def airForecast():
+
     city = request.args.get("city")
     if not city:
         return jsonify({"error": "City not provided"}), 400
 
-    # Step 1: Get coordinates using geopy
-    geolocator = Nominatim(user_agent="aqi_app")
+    # -----------------------------
+    # Step 1: Get coordinates
+    # -----------------------------
+    geolocator = Nominatim(user_agent="urban_optima_forecast")
     location = geolocator.geocode(f"{city}, India", exactly_one=True)
+
     if not location:
         return jsonify({"error": "City not found"}), 404
+
     lat, lon = location.latitude, location.longitude
 
-    # Step 2: Setup Open-Meteo API client
+    # -----------------------------
+    # Step 2: Setup Open-Meteo
+    # -----------------------------
     cache_session = requests_cache.CachedSession('.cache', expire_after=3600)
     retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
     openmeteo = openmeteo_requests.Client(session=retry_session)
 
     url = "https://air-quality-api.open-meteo.com/v1/air-quality"
+
     params = {
         "latitude": lat,
         "longitude": lon,
         "hourly": [
             "pm10", "pm2_5", "carbon_monoxide", "ozone",
             "ammonia", "sulphur_dioxide", "nitrogen_dioxide"
-        ],
-        "current": [
-            "ozone", "sulphur_dioxide", "nitrogen_dioxide",
-            "carbon_monoxide", "pm2_5", "pm10", "ammonia"
         ]
     }
 
@@ -43,6 +49,7 @@ def airForecast():
     response = responses[0]
 
     hourly = response.Hourly()
+
     hourly_data = {
         "date": pd.date_range(
             start=pd.to_datetime(hourly.Time(), unit="s", utc=True),
@@ -61,20 +68,18 @@ def airForecast():
 
     df = pd.DataFrame(hourly_data)
 
-    # Step 3: Filter next 3 days
-
-    # Get forecast starting date
+    # -----------------------------
+    # Step 3: Filter Next 3 Days
+    # -----------------------------
     forecast_start = df["date"].iloc[0].normalize()
-    
-    # Define the desired 3 dates: 2, 3, 4 August
     start_date = forecast_start + pd.Timedelta(days=2)
     end_date = start_date + pd.Timedelta(days=4)
-    
-    # Filter rows where the date is in the desired range
+
     df_filtered = df[(df["date"] >= start_date) & (df["date"] < end_date)].copy()
 
-
-    # Step 4: Indian AQI calculation
+    # -----------------------------
+    # Step 4: Indian AQI Logic
+    # -----------------------------
     breakpoints = {
         "pm2_5": [(0, 30, 0, 50), (31, 60, 51, 100), (61, 90, 101, 200), (91, 120, 201, 300), (121, 250, 301, 400), (251, 350, 401, 500)],
         "pm10": [(0, 50, 0, 50), (51, 100, 51, 100), (101, 250, 101, 200), (251, 350, 201, 300), (351, 430, 301, 400), (431, 500, 401, 500)],
@@ -92,46 +97,22 @@ def airForecast():
 
     def compute_india_aqi(row):
         sub_indices = []
-        mapping = {
-            "pm2_5": "pm2_5",
-            "pm10": "pm10",
-            "no2": "nitrogen_dioxide",
-            "so2": "sulphur_dioxide",
-            "co": "carbon_monoxide",
-            "o3": "ozone"
-        }
-        for aqi_name, col in mapping.items():
-            val = row[col]
+        for pollutant, bp in breakpoints.items():
+            val = row[pollutant]
             if pd.notnull(val):
-                sub_idx = calc_sub_index(val, breakpoints[col])
+                sub_idx = calc_sub_index(val, bp)
                 if sub_idx is not None:
                     sub_indices.append(sub_idx)
         return max(sub_indices) if sub_indices else None
-    
 
     df_filtered["india_aqi"] = df_filtered.apply(compute_india_aqi, axis=1)
     df_filtered["date_str"] = df_filtered["date"].dt.strftime("%d %b")
 
-    def map_to_openweather_scale(aqi):
-        if pd.isnull(aqi):
-            return None
-        if aqi <= 50:
-            return 1  # Good
-        elif aqi <= 100:
-            return 2  # Fair
-        elif aqi <= 200:
-            return 3  # Moderate
-        elif aqi <= 300:
-            return 4  # Poor
-        else:
-            return 5  # Very Poor
-
-    df_filtered["aqi_range"] = df_filtered["india_aqi"].apply(map_to_openweather_scale)
     result = df_filtered.groupby("date_str").apply(
-    lambda group: pd.Series({
-        "exp_aqi": round(group["india_aqi"].max(), 0),
-        "aqi_range": int(group[group["india_aqi"] == group["india_aqi"].max()]["aqi_range"].iloc[0])
-    })
+        lambda group: pd.Series({
+            "exp_aqi": round(group["india_aqi"].max(), 0)
+        })
     ).reset_index()
 
     return jsonify(result.to_dict(orient="records"))
+

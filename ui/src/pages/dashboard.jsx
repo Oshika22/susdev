@@ -165,12 +165,13 @@ export default function Dashboard() {
       icon: faArrowUpFromWaterPump,
       onClick: () => navigate('/water'),
     },
-    // {
-    //   title: 'Waste Management',
-    //   description: 'Track and optimize city waste disposal',
-    //   icon: faDumpsterFire,
-    //   onClick: () => navigate('/traffic'),
-    // },
+    {
+      title: 'Waste Management',
+      description: 'AI-based waste detection & cleaning verification',
+      icon: faDumpsterFire,
+      onClick: () => navigate('/waste'),
+    },
+    
   ];
   return (
     <div className="min-h-screen px-4 py-10">
