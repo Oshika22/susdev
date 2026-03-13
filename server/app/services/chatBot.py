@@ -1,7 +1,7 @@
 from flask import request, jsonify
 import requests, os
 
-API_KEY = "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"
+API_KEY = "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"
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 def call_openrouter(prompt):
@@ -11,7 +11,7 @@ def call_openrouter(prompt):
         "application/json"
     }
     data = {
-        "model": "mistralai/mistral-small-24b-instruct-2501:free",  # or correct gemma model name
+        "model": "deepseek/deepseek-r1-0528:free",  # or correct gemma model name
         "messages": [
             {"role": "system", "content":
                 ("You are Advisor Bot, a friendly and knowledgeable sustainability assistant. "

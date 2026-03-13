@@ -11,9 +11,12 @@ def overall_data():
 
     try:
         # Fetch existing data from your other APIs
-        air_data = requests.get("http://127.0.0.1:5000/api/air").json()
-        traffic_data = requests.get("http://127.0.0.1:5000/api/traffic").json()
-        energy_data = requests.get("http://127.0.0.1:5000/api/energy").json()
+        air_data = requests.get("http://127.0.0.1:5001
+/api/air").json()
+        traffic_data = requests.get("http://127.0.0.1:5001
+/api/traffic").json()
+        energy_data = requests.get("http://127.0.0.1:5001
+/api/energy").json()
 
         # Safely extract values (use whatever your endpoints return)
         air_aqi = air_data.get("aqi", 100)

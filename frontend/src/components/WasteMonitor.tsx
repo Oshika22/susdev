@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-const API = "http://127.0.0.1:5000";
+const API = "http://127.0.0.1:5001";
 
 const WasteMonitor = () => {
-  const [beforeFile, setBeforeFile] = useState<File | null>(null);
-  const [afterFile, setAfterFile] = useState<File | null>(null);
-  const [result, setResult] = useState<any>(null);
+  const [beforeFile, setBeforeFile] = useState(null);
+  const [afterFile, setAfterFile] = useState(null);
+  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const uploadImage = async (endpoint: string, file: File) => {
+  const uploadImage = async (endpoint, file) => {
     const formData = new FormData();
     formData.append("image", file);
 
@@ -24,16 +24,22 @@ const WasteMonitor = () => {
       return;
     }
 
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    await uploadImage("/api/upload-before", beforeFile);
-    await uploadImage("/api/upload-after", afterFile);
+      await uploadImage("/api/upload-before", beforeFile);
+      await uploadImage("/api/upload-after", afterFile);
 
-    const res = await fetch(`${API}/api/verify-cleaning`);
-    const data = await res.json();
+      const res = await fetch(`${API}/api/verify-cleaning`);
+      const data = await res.json();
 
-    setResult(data);
-    setLoading(false);
+      setResult(data);
+    } catch (error) {
+      console.error("Verification error:", error);
+      alert("Something went wrong during verification.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -41,7 +47,8 @@ const WasteMonitor = () => {
       <h2>Waste Detection & Cleaning Verification</h2>
 
       <div style={{ marginBottom: "15px" }}>
-        <label>Before Cleaning Image:</label><br />
+        <label>Before Cleaning Image:</label>
+        <br />
         <input
           type="file"
           accept="image/*"
@@ -50,7 +57,8 @@ const WasteMonitor = () => {
       </div>
 
       <div style={{ marginBottom: "15px" }}>
-        <label>After Cleaning Image:</label><br />
+        <label>After Cleaning Image:</label>
+        <br />
         <input
           type="file"
           accept="image/*"
