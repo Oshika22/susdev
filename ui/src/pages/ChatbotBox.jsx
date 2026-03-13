@@ -17,7 +17,7 @@ export default function FloatingChatbot() {
     setInput('');
 
     try {
-      const res = await axios.post('http://localhost:5000/chat', { message: input });
+      const res = await axios.post('http://localhost:5001/chat', { message: input });
       setMessages([...newMessages, { role: 'assistant', content: res.data.response }]);
     } catch (err) {
       setMessages([...newMessages, { role: 'assistant', content: '⚠️ Chatbot error, please try again.' }]);

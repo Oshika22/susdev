@@ -9,7 +9,7 @@ const Traffic = () => {
 
   const fetchTrafficData = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/traffic", {
+      const res = await fetch("http://localhost:5001/api/traffic", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ from, to }),
@@ -57,7 +57,7 @@ const Traffic = () => {
           <div className="bg-white rounded-lg border border-purple-400 p-4 flex flex-col items-center justify-center">
             <div className="w-full h-80 bg-blue-100 rounded-md flex flex-col items-center justify-center text-sm text-gray-700">
            <iframe
-              src={`http://localhost:5000/map?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
+              src={`http://localhost:5001/map?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`}
               title="Traffic Map"
               className="w-full h-full border-0 rounded-md"
             />

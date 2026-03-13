@@ -17,7 +17,7 @@ function Water() {
 
   const fetchWaterData = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/water", {
+      const res = await fetch("http://localhost:5001/api/water", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ area }),

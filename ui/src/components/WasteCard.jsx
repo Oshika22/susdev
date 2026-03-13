@@ -19,7 +19,7 @@ export default function WasteCard() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/waste/full-cycle",
+        "http://127.0.0.1:5001/api/waste/full-cycle",
         {
           method: "POST",
           body: formData,

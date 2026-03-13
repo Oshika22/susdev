@@ -5,7 +5,7 @@ export default function SustainablityCard() {
   const [data, setData] = useState(null);
 
 //   useEffect(() => {
-//     fetch('http://127.0.0.1:5000/api/overall-data')
+//     fetch('http://127.0.0.1:5001/api/overall-data')
 //       .then(res => res.json())
 //       .then(setData)
 //       .catch(err => console.error('Error fetching sustainability data:', err));

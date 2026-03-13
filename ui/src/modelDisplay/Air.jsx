@@ -27,7 +27,7 @@ function Air() {
 
   const fetchAirData = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/air", {
+      const res = await fetch("http://localhost:5001/api/air", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ city }),
@@ -35,7 +35,7 @@ function Air() {
       const result = await res.json();
       setAqiData(result);
 
-      const forecastRes = await axios.get("http://localhost:5000/api/airForecast", {
+      const forecastRes = await axios.get("http://localhost:5001/api/airForecast", {
       params: { city }
       });
       setForecastData(forecastRes.data);
@@ -100,7 +100,7 @@ function Air() {
           </h2>
           <div className="w-full h-96 rounded-xl overflow-hidden">
             {/* <iframe
-              src={`http://localhost:5000/map/air?city=${encodeURIComponent(
+              src={`http://localhost:5001/map/air?city=${encodeURIComponent(
                 city
               )}`}
               title="Air Quality Map"
